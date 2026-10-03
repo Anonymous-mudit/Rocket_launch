@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Itzfizz — Scroll to Launch</title>
+  <meta name="description"
+    content="A scroll-driven, cinematic rocket launch hero section built with HTML, CSS, JavaScript and GSAP ScrollTrigger." />
+  <meta name="theme-color" content="#05071a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="veil" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#hero" aria-label="Itzfizz, back to launch">Itzfizz</a>
+    <span class="topbar__meta">Mission AX-01, dawn window</span>
+  </header>
+
+  <main>
+    <!-- ============ HERO: pinned, scroll-scrubbed launch ============ -->
+    <section class="hero" id="hero" aria-label="Rocket launch sequence">
+
+      <div class="scene" aria-hidden="true">
+        <div class="cam">
+          <div class="sky sky--dawn"></div>
+          <div class="sky sky--space"></div>
+          <div class="layer" data-depth="0.02"><canvas class="stars"></canvas></div>
+          <div class="layer" data-depth="0.06">
+            <div class="moon"></div>
+          </div>
+
+          <div class="layer" data-depth="0.12">
+            <div class="earth">
+              <div class="earth__sun"></div>
+            </div>
+          </div>
+
+          <!-- Far orbital traffic: space station, a distant cubesat, meteors -->
+          <div class="layer floaters floaters--far" data-depth="0.22">
+            <span class="meteor meteor--a"></span><span class="meteor meteor--b"></span><span
+              class="meteor meteor--c"></span>
+            <svg class="station" viewBox="0 0 420 140">
+              <defs>
+                <linearGradient id="gStArray" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#e2ab58" />
+                  <stop offset=".5" stop-color="#b47a33" />
+                  <stop offset="1" stop-color="#7c501c" />
+                </linearGradient>
+                <linearGradient id="gStModule" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" />
+                  <stop offset=".55" stop-color="#cfd3da" />
+                  <stop offset="1" stop-color="#6f747d" />
+                </linearGradient>
+                <pattern id="pStArray" width="8" height="8" patternUnits="userSpaceOnUse">
+                  <path d="M8 0V8M0 8H8" stroke="#3b2a12" stroke-opacity=".55" stroke-width=".7" fill="none" />
+                </pattern>
+              </defs>
+              <g fill="url(#gStArray)">
+                <rect x="26" y="6" width="40" height="56" />
+                <rect x="74" y="6" width="40" height="56" />
+                <rect x="306" y="6" width="40" height="56" />
+                <rect x="354" y="6" width="40" height="56" />
+                <rect x="26" y="78" width="40" height="56" />
+                <rect x="74" y="78" width="40" height="56" />
+                <rect x="306" y="78" width="40" height="56" />
+                <rect x="354" y="78" width="40" height="56" />
+              </g>
+              <g fill="url(#pStArray)">
+                <rect x="26" y="6" width="40" height="56" />
+                <rect x="74" y="6" width="40" height="56" />
+                <rect x="306" y="6" width="40" height="56" />
+                <rect x="354" y="6" width="40" height="56" />
+                <rect x="26" y="78" width="40" height="56" />
+                <rect x="74" y="78" width="40" height="56" />
+                <rect x="306" y="78" width="40" height="56" />
+                <rect x="354" y="78" width="40" height="56" />
+              </g>
+              <rect x="18" y="66" width="384" height="8" fill="#c9cdd4" />
+              <path d="M18 70 H402" stroke="#7d838c" stroke-width="1" />
+              <rect x="120" y="82" width="20" height="40" fill="#eef0f4" opacity=".85" />
+              <rect x="280" y="18" width="20" height="40" fill="#eef0f4" opacity=".85" />
+              <rect x="150" y="58" width="120" height="24" rx="10" fill="url(#gStModule)" />
+              <rect x="197" y="30" width="26" height="82" rx="10" fill="url(#gStModule)" />
+              <rect x="232" y="50" width="34" height="18" rx="7" fill="url(#gStModule)" />
+              <circle class="navlight" cx="402" cy="70" r="2.2" fill="#ff5a4d" />
+            </svg>
+            <svg class="cubesat cubesat--c" viewBox="0 0 100 60">
+              <use href="#cubesatShape" />
+            </svg>
+          </div>
+
+          <div class="layer" data-depth="0.3"><canvas class="clouds clouds--far"></canvas></div>
+
+          <div class="world">
+            <div class="horizon-glow"></div>
+            <div class="layer" data-depth="0.14" data-sink>
+              <div class="rays"></div>
+            </div>
+            <div class="layer" data-depth="0.25" data-sink>
+              <svg class="mtn mtn--far" viewBox="0 0 1600 300" preserveAspectRatio="none">
+                <path
+                  d="M0 210 L90 172 L160 190 L260 122 L340 160 L420 140 L520 72 L610 130 L700 110 L790 150 L880 92 L960 140 L1050 120 L1160 62 L1250 130 L1330 112 L1420 150 L1520 102 L1600 140 L1600 300 L0 300 Z"
+                  fill="#6e4a6a" opacity=".82" />
+                <path
+                  d="M0 210 L90 172 L160 190 L260 122 L340 160 L420 140 L520 72 L610 130 L700 110 L790 150 L880 92 L960 140 L1050 120 L1160 62 L1250 130 L1330 112 L1420 150 L1520 102 L1600 140"
+                  fill="none" stroke="#ffc49a" stroke-opacity=".16" stroke-width="1.2"
+                  vector-effect="non-scaling-stroke" />
+              </svg>
+            </div>
+            <div class="layer" data-depth="0.45" data-sink>
+              <svg class="mtn mtn--mid" viewBox="0 0 1600 300" preserveAspectRatio="none">
+                <path
+                  d="M0 230 C80 200 140 215 220 180 S360 150 450 190 S600 230 700 200 S860 140 980 180 S1150 220 1260 190 S1450 160 1600 200 L1600 300 L0 300 Z"
+                  fill="#3b2a45" opacity=".92" />
+                <path
+                  d="M0 230 C80 200 140 215 220 180 S360 150 450 190 S600 230 700 200 S860 140 980 180 S1150 220 1260 190 S1450 160 1600 200"
+                  fill="none" stroke="#ffb48a" stroke-opacity=".18" stroke-width="1"
+                  vector-effect="non-scaling-stroke" />
+              </svg>
+              <div class="lights"></div>
+            </div>
+            <div class="layer" data-depth="0.7" data-sink>
+              <svg class="mtn mtn--near" viewBox="0 0 1600 300" preserveAspectRatio="none">
+                <path
+                  d="M0 262 C120 240 240 255 380 236 S640 250 760 262 L840 262 S1000 245 1150 250 S1400 238 1600 252 L1600 300 L0 300 Z"
+                  fill="#1d1626" />
+              </svg>
+            </div>
+            <div class="ground"></div>
+            <div class="fog"><i></i><i></i><i></i></div>
+            <div class="beam beam--l"></div>
+            <div class="beam beam--r"></div>
+
+            <!-- Launch tower -->
+            <svg class="tower" viewBox="0 0 120 820">
+              <defs>
+                <pattern id="truss" width="56" height="56" patternUnits="userSpaceOnUse">
+                  <path d="M0 0 L56 56 M56 0 L0 56 M0 0 H56" stroke="#1a1b24" stroke-width="2.4" fill="none" />
+                </pattern>
+              </defs>
+              <line x1="60" y1="0" x2="60" y2="44" stroke="#15161d" stroke-width="2" />
+              <rect x="30" y="40" width="60" height="780" fill="url(#truss)" />
+              <rect x="28" y="40" width="5" height="780" fill="#12131a" />
+              <rect x="87" y="40" width="5" height="780" fill="#12131a" />
+              <rect x="91" y="40" width="1.2" height="780" fill="rgba(255,170,120,.28)" />
+              <rect x="26" y="36" width="68" height="8" fill="#12131a" />
+              <g id="crewArm">
+                <rect x="90" y="248" width="40" height="7" fill="#12131a" />
+                <rect x="124" y="238" width="16" height="26" rx="1.5" fill="#171820" />
+                <rect x="124" y="238" width="16" height="1" fill="rgba(255,170,120,.35)" />
+              </g>
+              <rect x="90" y="560" width="22" height="6" fill="#12131a" />
+              <circle class="beacon" cx="31" cy="38" r="3" fill="#ff3b30" />
+              <circle class="beacon beacon--late" cx="89" cy="38" r="3" fill="#ff3b30" />
+              <circle cx="60" cy="300" r="1.6" fill="#ffd9a0" opacity=".8" />
+              <circle cx="60" cy="480" r="1.6" fill="#ffd9a0" opacity=".7" />
+              <circle cx="60" cy="660" r="1.6" fill="#ffd9a0" opacity=".7" />
+            </svg>
+
+            <div class="pad-glow"></div>
+          </div>
+
+          <canvas class="smoke"></canvas>
+          <div class="smoke-glow"></div>
+
+          <!-- Rocket: one SVG, separable groups -->
+          <div class="rocket-wrap">
+            <div class="engine-glow"></div>
+            <svg class="rocket" viewBox="0 0 120 1400" preserveAspectRatio="xMidYMax meet">
+              <defs>
+                <linearGradient id="gBody" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#7e838c" />
+                  <stop offset=".14" stop-color="#c3c7cd" />
+                  <stop offset=".4" stop-color="#f3f4f6" />
+                  <stop offset=".56" stop-color="#ffffff" />
+                  <stop offset=".8" stop-color="#d6d9de" />
+                  <stop offset="1" stop-color="#727780" />
+                </linearGradient>
+                <linearGradient id="gFairing" gradientUnits="userSpaceOnUse" x1="28" x2="92" y1="0" y2="0">
+                  <stop offset="0" stop-color="#7e838c" />
+                  <stop offset=".14" stop-color="#c3c7cd" />
+                  <stop offset=".4" stop-color="#f3f4f6" />
+                  <stop offset=".56" stop-color="#ffffff" />
+                  <stop offset=".8" stop-color="#d6d9de" />
+                  <stop offset="1" stop-color="#727780" />
+                </linearGradient>
+                <linearGradient id="gDark" x1="0" x2="1">
+                  <stop offset="0" stop-color="#08090b" />
+                  <stop offset=".42" stop-color="#2a2d33" />
+                  <stop offset=".58" stop-color="#363940" />
+                  <stop offset="1" stop-color="#07080a" />
+                </linearGradient>
+                <linearGradient id="gMetal" x1="0" x2="1">
+                  <stop offset="0" stop-color="#2b2622" />
+                  <stop offset=".45" stop-color="#8d8278" />
+                  <stop offset=".55" stop-color="#a59889" />
+                  <stop offset="1" stop-color="#231f1c" />
+                </linearGradient>
+                <linearGradient id="gMvac" x1="0" x2="1">
+                  <stop offset="0" stop-color="#161413" />
+                  <stop offset=".5" stop-color="#5e4e40" />
+                  <stop offset="1" stop-color="#141211" />
+                </linearGradient>
+                <linearGradient id="gSoot" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#2a241e" stop-opacity="0" />
+                  <stop offset="1" stop-color="#2a241e" stop-opacity=".6" />
+                </linearGradient>
+                <linearGradient id="gFlameOuter" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#fff6dc" />
+                  <stop offset=".07" stop-color="#ffd38a" stop-opacity=".95" />
+                  <stop offset=".3" stop-color="#ff8c34" stop-opacity=".75" />
+                  <stop offset=".65" stop-color="#ff5a1a" stop-opacity=".28" />
+                  <stop offset="1" stop-color="#ff4a10" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="gFlameMid" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" />
+                  <stop offset=".25" stop-color="#ffe7b0" stop-opacity=".9" />
+                  <stop offset="1" stop-color="#ffb060" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="gFlameCore" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" />
+                  <stop offset=".5" stop-color="#e6f0ff" stop-opacity=".85" />
+                  <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="gFlameVac" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" />
+                  <stop offset=".12" stop-color="#d2ddff" stop-opacity=".85" />
+                  <stop offset=".5" stop-color="#8a9cff" stop-opacity=".3" />
+                  <stop offset="1" stop-color="#6d7dff" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="gFoil" x1="0" x2="1">
+                  <stop offset="0" stop-color="#6b4a10" />
+                  <stop offset=".3" stop-color="#e2ae45" />
+                  <stop offset=".5" stop-color="#fff0b5" />
+                  <stop offset=".72" stop-color="#cf952a" />
+                  <stop offset="1" stop-color="#5e400d" />
+                </linearGradient>
+                <linearGradient id="gPanel" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#2a4c96" />
+                  <stop offset=".5" stop-color="#14275c" />
+                  <stop offset="1" stop-color="#0b1636" />
+                </linearGradient>
+                <pattern id="pCells" width="12" height="11.5" patternUnits="userSpaceOnUse">
+                  <path d="M12 0 V11.5 M0 11.5 H12" stroke="#7f9be0" stroke-opacity=".45" stroke-width=".6"
+                    fill="none" />
+                </pattern>
+                <pattern id="pFin" width="3.5" height="3.5" patternUnits="userSpaceOnUse">
+                  <path d="M0 0 L3.5 3.5 M3.5 0 L0 3.5" stroke="#3a3d44" stroke-width=".7" />
+                </pattern>
+              </defs>
+
+              <!-- ===== Upper stack: payload + second stage + fairing ===== -->
+              <g id="stage2">
+                <g id="s2body">
+                  <g id="flame2" opacity="0">
+                    <path d="M44 528 C30 600 18 720 60 900 C102 720 90 600 76 528 Z" fill="url(#gFlameVac)" />
+                    <path d="M52 528 C48 570 50 620 60 680 C70 620 72 570 68 528 Z" fill="url(#gFlameCore)" />
+                  </g>
+                  <path d="M50 430 C50 470 42 504 35 530 L85 530 C78 504 70 470 70 430 Z" fill="url(#gMvac)" />
+                  <path d="M35 530 L85 530" stroke="#8b6e52" stroke-width="1.2" />
+                  <rect x="34" y="240" width="52" height="192" fill="url(#gBody)" />
+                  <path d="M34 300 H86 M34 382 H86" stroke="#000" stroke-opacity=".1" stroke-width=".8" />
+                  <path d="M34 240 L86 240 L92 231 L28 231 Z" fill="url(#gFairing)" />
+                </g>
+
+                <g id="payload">
+                  <g id="panelL">
+                    <rect x="-66" y="130" width="108" height="44" fill="url(#gPanel)" />
+                    <rect x="-66" y="130" width="108" height="44" fill="url(#pCells)" />
+                    <rect x="-66" y="130" width="108" height="44" fill="none" stroke="#9fb3e6" stroke-opacity=".6"
+                      stroke-width=".8" />
+                  </g>
+                  <g id="panelR">
+                    <rect x="78" y="130" width="108" height="44" fill="url(#gPanel)" />
+                    <rect x="78" y="130" width="108" height="44" fill="url(#pCells)" />
+                    <rect x="78" y="130" width="108" height="44" fill="none" stroke="#9fb3e6" stroke-opacity=".6"
+                      stroke-width=".8" />
+                  </g>
+                  <path d="M46 200 L74 200 L80 231 L40 231 Z" fill="#9aa0a8" />
+                  <rect x="42" y="105" width="36" height="96" rx="2" fill="url(#gFoil)" />
+                  <path d="M42 120 H78 M42 186 H78" stroke="#000" stroke-opacity=".22" stroke-width="1" />
+                  <line x1="60" y1="98" x2="60" y2="84" stroke="#c9ccd2" stroke-width="1.2" />
+                  <ellipse cx="60" cy="98" rx="15" ry="4.5" fill="#eceef2" />
+                  <ellipse cx="60" cy="97" rx="11" ry="2.6" fill="#c3c7cf" />
+                  <circle class="navlight" cx="44.5" cy="108" r="1.7" fill="#ff5a4d" />
+                  <circle class="navlight navlight--late" cx="75.5" cy="108" r="1.7" fill="#5dff9a" />
+                </g>
+
+                <path id="fairingL" d="M60 2 C42 22 28 80 28 150 L28 231 L60 231 Z" fill="url(#gFairing)" />
+                <g id="fairingR">
+                  <path d="M60 2 C78 22 92 80 92 150 L92 231 L60 231 Z" fill="url(#gFairing)" />
+                  <line x1="60" y1="6" x2="60" y2="231" stroke="#000" stroke-opacity=".16" stroke-width=".6" />
+                </g>
+              </g>
+
+              <!-- ===== First stage (booster) ===== -->
+              <g id="stage1">
+                <g id="flame1" opacity="0">
+                  <path d="M30 1066 C16 1140 12 1250 60 1400 C108 1250 104 1140 90 1066 Z" fill="url(#gFlameOuter)" />
+                  <path d="M40 1066 C33 1120 36 1205 60 1305 C84 1205 87 1120 80 1066 Z" fill="url(#gFlameMid)" />
+                  <path d="M48 1066 C46 1100 50 1150 60 1192 C70 1150 74 1100 72 1066 Z" fill="url(#gFlameCore)" />
+                  <ellipse cx="60" cy="1118" rx="7" ry="4" fill="#fff" opacity=".55" />
+                  <ellipse cx="60" cy="1160" rx="5" ry="3" fill="#fff" opacity=".35" />
+                </g>
+
+                <path d="M38 1036 L50 1036 L54 1070 L34 1070 Z" fill="url(#gMetal)" />
+                <path d="M70 1036 L82 1036 L86 1070 L66 1070 Z" fill="url(#gMetal)" />
+                <path d="M54 1036 L66 1036 L70 1071 L50 1071 Z" fill="url(#gMetal)" />
+                <path d="M34 1012 L86 1012 L88 1038 L32 1038 Z" fill="#1a1b1f" />
+
+                <rect x="34" y="500" width="52" height="514" fill="url(#gBody)" />
+                <rect x="34" y="770" width="52" height="244" fill="url(#gSoot)" />
+                <path d="M34 640 H86 M34 830 H86" stroke="#000" stroke-opacity=".09" stroke-width=".8" />
+                <text transform="translate(55 556) rotate(90)" font-family="Syncopate, Arial, sans-serif"
+                  font-weight="700" font-size="12.5" letter-spacing="6" fill="#16181d">ITZFIZZ</text>
+
+                <rect x="34" y="852" width="6" height="160" fill="#141518" />
+                <rect x="80" y="852" width="6" height="160" fill="#141518" />
+                <rect x="56" y="862" width="8" height="150" fill="#18191d" opacity=".92" />
+
+                <rect x="34" y="430" width="52" height="72" fill="url(#gDark)" />
+                <rect x="34" y="430" width="52" height=".8" fill="#fff" opacity=".18" />
+                <rect x="20" y="438" width="14" height="18" fill="url(#pFin)" stroke="#26292e" stroke-width="1.6" />
+                <rect x="86" y="438" width="14" height="18" fill="url(#pFin)" stroke="#26292e" stroke-width="1.6" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- Closer orbital traffic -->
+          <div class="layer floaters floaters--mid" data-depth="0.6">
+            <svg class="cubesat cubesat--a" viewBox="0 0 100 60">
+              <use href="#cubesatShape" />
+            </svg>
+            <svg class="cubesat cubesat--b" viewBox="0 0 100 60">
+              <use href="#cubesatShape" />
+            </svg>
+          </div>
+
+          <canvas class="clouds clouds--near"></canvas>
+          <canvas class="motes"></canvas>
+          <div class="flash"></div>
+          <div class="vignette"></div>
+        </div>
+      </div>
+
+      <!-- Shared cubesat drawing (referenced with <use>) -->
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+          <g id="cubesatShape">
+            <rect x="2" y="23" width="34" height="14" fill="url(#gPanel)" />
+            <rect x="2" y="23" width="34" height="14" fill="url(#pCells)" />
+            <rect x="64" y="23" width="34" height="14" fill="url(#gPanel)" />
+            <rect x="64" y="23" width="34" height="14" fill="url(#pCells)" />
+            <rect x="36" y="29" width="28" height="2" fill="#9aa0a8" />
+            <rect x="40" y="16" width="20" height="28" rx="1.5" fill="url(#gFoil)" />
+            <path d="M40 24 H60 M40 36 H60" stroke="#000" stroke-opacity=".25" stroke-width=".8" />
+            <line x1="50" y1="16" x2="50" y2="5" stroke="#cfd3da" stroke-width="1" />
+            <circle cx="50" cy="5" r="1.6" fill="#e9ecf0" />
+            <circle class="navlight" cx="61" cy="18" r="1.8" fill="#ff5a4d" />
+          </g>
+        </defs>
+      </svg>
+
+      <div class="letterbox letterbox--top" aria-hidden="true"></div>
+      <div class="letterbox letterbox--bottom" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow__inner">Mission AX-01 lifts off at first light</span></p>
+        <h1 class="headline" aria-label="Welcome Itzfizz">WELCOME ITZFIZZ</h1>
+
+        <ul class="stats">
+          <li class="stat">
+            <div class="stat__inner">
+              <p class="stat__figure"><span class="stat__value" data-value="98">0</span><span
+                  class="stat__unit">%</span></p>
+              <p class="stat__label">Mission success across 240 flights</p>
+            </div>
+          </li>
+          <li class="stat">
+            <div class="stat__inner">
+              <p class="stat__figure"><span class="stat__value" data-value="94">0</span><span
+                  class="stat__unit">%</span></p>
+              <p class="stat__label">Boosters landed and flown again</p>
+            </div>
+          </li>
+          <li class="stat">
+            <div class="stat__inner">
+              <p class="stat__figure"><span class="stat__value" data-value="73">0</span><span
+                  class="stat__unit">%</span></p>
+              <p class="stat__label">Lower cost per kilogram to orbit</p>
+            </div>
+          </li>
+          <li class="stat">
+            <div class="stat__inner">
+              <p class="stat__figure"><span class="stat__value" data-value="35">0</span><span
+                  class="stat__unit">%</span></p>
+              <p class="stat__label">Faster turnaround between launches</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="countdown" aria-hidden="true"><span>3</span><span>2</span><span>1</span></div>
+
+      <div class="captions" aria-hidden="true">
+        <div class="caption" data-cap="liftoff">
+          <h2>Liftoff</h2>
+          <p>Hold-down clamps release at full thrust.</p>
+        </div>
+        <div class="caption" data-cap="maxq">
+          <h2>Max-Q</h2>
+          <p>Peak aerodynamic pressure. Engines throttle back.</p>
+        </div>
+        <div class="caption" data-cap="meco">
+          <h2>Engine cutoff</h2>
+          <p>The booster has done its job, 78 km up.</p>
+        </div>
+        <div class="caption" data-cap="sep">
+          <h2>Stage separation</h2>
+          <p>The upper stage lights its vacuum engine.</p>
+        </div>
+        <div class="caption" data-cap="fairing">
+          <h2>Fairing jettison</h2>
+          <p>The nose cone splits open above the atmosphere.</p>
+        </div>
+        <div class="caption" data-cap="orbit">
+          <h2>Orbit</h2>
+          <p>210 km above Earth, moving at 27,400 km/h.</p>
+        </div>
+      </div>
+
+      <div class="hud" aria-hidden="true">
+        <div class="hud__group">
+          <div class="hud__block"><span class="hud__label">Mission clock</span><span class="hud__value"
+              id="hudClock">T−00:00:10</span></div>
+          <div class="hud__block"><span class="hud__label">Altitude</span><span class="hud__value" id="hudAlt">0.0
+              km</span></div>
+          <div class="hud__block"><span class="hud__label">Velocity</span><span class="hud__value" id="hudVel">0
+              km/h</span></div>
+        </div>
+        <ol class="hud__phases">
+          <li>Ignition</li>
+          <li>Liftoff</li>
+          <li>Max-Q</li>
+          <li>Cutoff</li>
+          <li>Separation</li>
+          <li>Fairing</li>
+          <li>Orbit</li>
+        </ol>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">
+        <div class="scroll-cue__inner"><span>Scroll to launch</span><i></i></div>
+      </div>
+      <div class="progress" aria-hidden="true"><i></i></div>
+    </section>
+
+    <!-- ============ AFTER THE HERO ============ -->
+    <section class="profile" id="profile">
+      <div class="profile__head reveal">
+        <h2>Nine minutes from the pad to orbit.</h2>
+        <p>What you just scrolled through follows a real two-stage flight profile. Every number on the telemetry readout
+          tracks the moment it represents.</p>
+      </div>
+
+      <ol class="timeline">
+        <li class="reveal">
+          <span class="timeline__t">T−00:00:03</span>
+          <h3>Ignition</h3>
+          <p>Nine engines light in sequence. Clamps hold the vehicle down until the computers confirm full thrust.</p>
+        </li>
+        <li class="reveal">
+          <span class="timeline__t">T+00:01:10</span>
+          <h3>Max-Q</h3>
+          <p>The rocket passes through peak aerodynamic stress as it goes supersonic, so the engines briefly throttle
+            down.</p>
+        </li>
+        <li class="reveal">
+          <span class="timeline__t">T+00:02:42</span>
+          <h3>Stage separation</h3>
+          <p>The booster cuts off and falls away. The upper stage continues alone in near-vacuum, where its exhaust
+            plume balloons outward.</p>
+        </li>
+        <li class="reveal">
+          <span class="timeline__t">T+00:08:56</span>
+          <h3>Orbit</h3>
+          <p>Second-stage cutoff at orbital speed. The fairing halves are gone and the satellite unfolds its solar
+            arrays.</p>
+        </li>
+      </ol>
+
+      <dl class="specs reveal">
+        <div>
+          <dt>Vehicle height</dt>
+          <dd>70 m</dd>
+        </div>
+        <div>
+          <dt>Diameter</dt>
+          <dd>3.7 m</dd>
+        </div>
+        <div>
+          <dt>Payload to low orbit</dt>
+          <dd>22.8 t</dd>
+        </div>
+        <div>
+          <dt>Liftoff thrust</dt>
+          <dd>7,607 kN</dd>
+        </div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Designed and built by <a href="https://github.com/Anonymous-mudit" target="_blank" rel="noopener">Mudit
+        Bhardwaj</a>
+  </footer>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="js/sky.js"></script>
+  <script src="js/smoke.js"></script>
+  <script src="js/motes.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

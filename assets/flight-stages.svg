@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #090d24; }
+      .line { stroke: #1e293b; stroke-width: 2; }
+      .active-line { stroke: #38bdf8; stroke-width: 2; stroke-dasharray: 4 4; animation: move-dash 1s linear infinite; }
+
+      @keyframes move-dash {
+        to { stroke-dashoffset: -8; }
+      }
+
+      @keyframes node-pulse {
+        0%, 100% { fill: #38bdf8; r: 6; }
+        50% { fill: #00e5ff; r: 8; }
+      }
+
+      @keyframes glow-ring {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.4); }
+      }
+
+      .node-active { animation: node-pulse 1.5s infinite ease-in-out; }
+      .ring { animation: glow-ring 1.5s infinite ease-in-out; transform-origin: center; }
+
+      .text-stage { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #94a3b8; }
+      .text-active { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 700; fill: #38bdf8; }
+      .text-time { font-family: 'Courier New', Courier, monospace; font-size: 10px; fill: #64748b; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="120" rx="8" class="bg" stroke="#1e293b" stroke-width="1" />
+
+  <!-- Stage Connecting Line -->
+  <line x1="80" y1="50" x2="720" y2="50" class="active-line" />
+
+  <!-- Stage 1: T-00:10 Pre-Launch -->
+  <g transform="translate(80, 50)">
+    <circle cx="0" cy="0" r="5" fill="#38bdf8" />
+    <text x="0" y="28" text-anchor="middle" class="text-stage">PRE-LAUNCH</text>
+    <text x="0" y="42" text-anchor="middle" class="text-time">T-00:10</text>
+  </g>
+
+  <!-- Stage 2: T+00:12 Liftoff -->
+  <g transform="translate(208, 50)">
+    <circle cx="0" cy="0" r="5" fill="#38bdf8" />
+    <text x="0" y="28" text-anchor="middle" class="text-stage">LIFTOFF</text>
+    <text x="0" y="42" text-anchor="middle" class="text-time">T+00:12</text>
+  </g>
+
+  <!-- Stage 3: T+01:42 Max-Q -->
+  <g transform="translate(336, 50)">
+    <circle cx="0" cy="0" r="5" fill="#38bdf8" />
+    <text x="0" y="28" text-anchor="middle" class="text-stage">MAX-Q</text>
+    <text x="0" y="42" text-anchor="middle" class="text-time">T+01:42</text>
+  </g>
+
+  <!-- Stage 4: T+02:42 MECO & Sep -->
+  <g transform="translate(464, 50)">
+    <circle cx="0" cy="0" r="5" fill="#38bdf8" />
+    <text x="0" y="28" text-anchor="middle" class="text-stage">MECO / SEP</text>
+    <text x="0" y="42" text-anchor="middle" class="text-time">T+02:42</text>
+  </g>
+
+  <!-- Stage 5: T+03:20 Fairing -->
+  <g transform="translate(592, 50)">
+    <circle cx="0" cy="0" r="5" fill="#38bdf8" />
+    <text x="0" y="28" text-anchor="middle" class="text-stage">FAIRING</text>
+    <text x="0" y="42" text-anchor="middle" class="text-time">T+03:20</text>
+  </g>
+
+  <!-- Stage 6: T+08:56 Orbit Deploy -->
+  <g transform="translate(720, 50)">
+    <circle cx="0" cy="0" r="8" fill="#38bdf8" opacity="0.3" class="ring" />
+    <circle cx="0" cy="0" r="6" class="node-active" />
+    <text x="0" y="28" text-anchor="middle" class="text-active">ORBIT DEPLOY</text>
+    <text x="0" y="42" text-anchor="middle" class="text-time">T+08:56</text>
+  </g>
+</svg>
